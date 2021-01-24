@@ -15,7 +15,7 @@ exports.newLink = async (req, res, next) => {
 
   const link = new Links();
   link.url = shortid.generate();
-  link.name = shortid.generate();
+  link.name = name;
   link.original_name = original_name;
   // link.autor = req.user.documentId;
 
@@ -38,7 +38,6 @@ exports.newLink = async (req, res, next) => {
 
   // }
   console.log(link);
-  // Almacenar en la BD
   try {
     await link.save();
     return res.json({ msg: `${link.url}` });
@@ -110,8 +109,7 @@ exports.getLink = async (req, res, next) => {
     return next();
   }
 
-  // If link doesn't exist
-  res.json({ archivo: link.nombre, password: false });
+  res.json({ uploadedFile: link.name, password: false });
 
   next();
 };

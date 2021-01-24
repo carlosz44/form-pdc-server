@@ -45,29 +45,29 @@ exports.deleteFile = async (req, res) => {
   }
 };
 
-// Descarga un archivo
+// Download the file
 exports.download = async (req, res, next) => {
-  // Get linl
-  const { archivo } = req.params;
-  const link = await Links.findOne({ nombre: archivo });
-
-  const archivoDescarga = __dirname + "/../uploads/" + archivo;
-  res.download(archivoDescarga);
+  // Get link
+  const { uploadedFile } = req.params;
+  // const link = await Links.findOne({ nombre: archivo });
+  console.log(uploadedFile);
+  const downloadLink = __dirname + "/../uploads/" + uploadedFile;
+  res.download(downloadLink);
 
   // Eliminar el archivo y la entrada de la BD
   // Si las descargas son iguales a 1 - Borrar la entrada y borrar el archivo
-  const { descargas, nombre } = link;
+  // const { descargas, nombre } = link;
 
-  if (descargas === 1) {
-    // Eliminar el archivo
-    req.archivo = nombre;
+  // if (descargas === 1) {
+  //   // Eliminar el archivo
+  //   req.archivo = nombre;
 
-    // eliminar la entrada de la bd
-    await Links.findOneAndRemove(link.id);
-    next();
-  } else {
-    // si las descargas son > a 1 - Restar 1
-    link.descargas--;
-    await link.save();
-  }
+  //   // eliminar la entrada de la bd
+  //   await Links.findOneAndRemove(link.id);
+  //   next();
+  // } else {
+  //   // si las descargas son > a 1 - Restar 1
+  //   link.descargas--;
+  //   await link.save();
+  // }
 };

@@ -4,6 +4,10 @@ const uploadsController = require("../controllers/uploadsController");
 
 router.post("/", uploadsController.uploadFile);
 
-router.get("/:url", uploadsController.download, uploadsController.deleteFile);
+router.get(
+  "/:uploadedFile",
+  uploadsController.download,
+  uploadsController.deleteFile
+);
 
 module.exports = router;

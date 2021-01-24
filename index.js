@@ -21,7 +21,7 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 
 // Public folder
-// app.use(express.static("uploads"));
+app.use(express.static("uploads"));
 
 // App routes
 app.use("/api/users", require("./routes/users"));
