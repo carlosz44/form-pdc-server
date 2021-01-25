@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const linksController = require("../controllers/linksController");
 const { check } = require("express-validator");
-// const auth = require("../middleware/auth");
 
 router.post(
   "/",
@@ -15,11 +14,7 @@ router.post(
 
 router.get("/", linksController.allLinks);
 
-router.get(
-  "/:url",
-  // linksController.tienePassword,
-  linksController.getLink
-);
+router.get("/:url", linksController.getLink);
 
 router.post(
   "/:url",
